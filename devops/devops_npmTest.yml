@@ -1,0 +1,20 @@
+version: 0.2
+
+env:
+  environment: "dev"
+
+phases:
+  install:
+    commands:
+      - echo building TPIP front end application
+      - cd npm_test
+      # - echo start install yarn
+      # - npm install -g yarn
+      # - echo Finished installing yarn
+  build:
+    commands:
+      - echo build and copy files to S3 bucket
+      - npm run build:dev
+      - aws s3 sync --delete build/ s3://tpip-npm-test
+      - echo Finished copied to s3 bucket
+
